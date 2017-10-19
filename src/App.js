@@ -7,6 +7,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 class App extends Component {
   render() {
+    const title = `${new Date()}`;
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
@@ -31,7 +32,7 @@ class App extends Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: "#fff", padding: 0 }} />
+          <Header style={{ background: "#fff", padding: 0 }}>{title}</Header>
           <Content style={{ margin: "24px 16px 0" }}>
             <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
               {this.props.children}

@@ -13,7 +13,11 @@ const app = dva({
   }
 });
 
-app.use(createLoading());
+app.use(
+  createLoading({
+    effects: true
+  })
+);
 app.router(RouterConfig);
 app.start("#root");
 

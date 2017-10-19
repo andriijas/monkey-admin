@@ -3,7 +3,7 @@ import { Router, Switch, Route } from "dva/router";
 import dynamic from "dva/dynamic";
 import App from "./App";
 
-function RouterConfig({ history, app }) {
+export default function RouterConfig({ history, app }) {
   const IndexPage = dynamic({
     app,
     component: () =>
@@ -19,13 +19,11 @@ function RouterConfig({ history, app }) {
   return (
     <Router history={history}>
       <App>
-        <Switch>
+        <div>
           <Route exact path="/" component={IndexPage} />
-          <Route exact path="/users" component={Users} />
-        </Switch>
+          <Route path="/users" component={Users} />
+        </div>
       </App>
     </Router>
   );
 }
-
-export default RouterConfig;
