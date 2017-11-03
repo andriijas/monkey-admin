@@ -1,0 +1,16 @@
+@import "../theme.less";
+
+.Footer {
+  padding: @gutter-24 @gutter-48;
+  background: @primary-1;
+  text-align: center;
+
+  &Bugs {
+    transform: rotate(180deg);
+    transition: all 0.5s ease-in-out;
+    display: inline-block;
+    &:hover {
+      transform: rotate(0);
+    }
+  }
+}

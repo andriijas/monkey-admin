@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Switch, Route } from "dva/router";
+import { Router, Route } from "dva/router";
 import dynamic from "dva/dynamic";
 import App from "./App";
 

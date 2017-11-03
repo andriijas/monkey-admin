@@ -6,7 +6,6 @@ import { Menu, Icon } from "antd";
 const SelectedUser = ({ match }) => <h1>{match.params.user}</h1>;
 
 function Users({ match, location }) {
-  const title = `${new Date()}`;
   return (
     <div location={location}>
       <h1>consectetur adipisicing</h1>

@@ -3,11 +3,12 @@ import { Link } from "dva/router";
 import { Layout, Menu, Icon } from "antd";
 //import "./App.css";
 
-const { Header, Content, Footer, Sider } = Layout;
+import Footer from "components/Footer";
+
+const { Header, Content, Sider } = Layout;
 
 class App extends Component {
   render() {
-    const title = `${new Date()}`;
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
@@ -32,15 +33,13 @@ class App extends Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: "#fff", padding: 0 }}>{title}</Header>
+          <Header style={{ background: "#fff", padding: 0 }} />
           <Content style={{ margin: "24px 16px 0" }}>
             <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
               {this.props.children}
             </div>
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2016 Created by Ant UED
-          </Footer>
+          <Footer />
         </Layout>
       </Layout>
     );
