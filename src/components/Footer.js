@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Row, Col } from "antd";
 
-import styles from "./Footer.less";
+import styles from "./Footer.module.less";
 
 const Footer = props => (
   <Layout.Footer className={styles.Footer}>

@@ -2,7 +2,8 @@ import dva from "dva";
 import createHistory from "history/createBrowserHistory";
 import createLoading from "dva-loading";
 import { message } from "antd";
-import registerServiceWorker from "./registerServiceWorker";
+import RouterConfig from "./router";
+//import registerServiceWorker from "./registerServiceWorker";
 //import "./index.css";
 
 const app = dva({
@@ -17,7 +18,7 @@ app.use(
     effects: true
   })
 );
-app.router(require("./router"));
+app.router(RouterConfig);
 app.start("#root");
 
-registerServiceWorker();
+//registerServiceWorker();

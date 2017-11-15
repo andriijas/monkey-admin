@@ -21,7 +21,6 @@ module.exports = function override(config, env) {
       modifyVars: {
         "@primary-color": "#61dafb",
         "@info-color": "#61dafb",
-        "@font-size-base": "14px"
       }
     }
   )(config, env);
