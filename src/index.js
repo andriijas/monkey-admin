@@ -1,24 +1,20 @@
-import dva from "dva";
-import createHistory from "history/createBrowserHistory";
-import createLoading from "dva-loading";
-import { message } from "antd";
-import RouterConfig from "./router";
-//import registerServiceWorker from "./registerServiceWorker";
-//import "./index.css";
+import app from "./server";
+import http from "http";
 
-const app = dva({
-  history: createHistory(),
-  onError(e) {
-    message.error(e.message, 3);
-  }
-});
+const server = http.createServer(app);
 
-app.use(
-  createLoading({
-    effects: true
-  })
-);
-app.router(RouterConfig);
-app.start("#root");
+let currentApp = app;
 
-//registerServiceWorker();
+server.listen(process.env.PORT || 3000);
+
+if (module.hot) {
+  console.log("✅  Server-side HMR Enabled!");
+
+  module.hot.accept("./server", () => {
+    console.log("🔁  HMR Reloading `./server`...");
+    server.removeListener("request", currentApp);
+    const newApp = require("./server").default;
+    server.on("request", newApp);
+    currentApp = newApp;
+  });
+}

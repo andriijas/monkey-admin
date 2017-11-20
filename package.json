@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-plugin-css-modules-transform": "^1.4.0",
     "babel-plugin-dva-hmr": "^0.4.1",
     "babel-plugin-import": "^1.6.3",
-    "react-app-rewire-less-modules": "^1.2.0",
-    "react-app-rewire-vendor-splitting": "^1.2.0",
-    "react-app-rewired": "^1.4.0",
+    "ignore-loader": "^0.1.2",
     "redbox-react": "^1.5.0",
     "webpack-bundle-analyzer": "^2.9.2"
   },
@@ -15,17 +14,26 @@
     "antd": "^3.1.4",
     "dva": "^2.1.0",
     "dva-loading": "^1.0.4",
+    "express": "4.16.2",
+    "raf": "3.4.0",
+    "razzle": "0.8.7",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "2.0.0-next.9754a231"
+    "react-dom": "^16.2.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom"
+    "start": "razzle start",
+    "build": "razzle build",
+    "test": "razzle test --env=jsdom",
+    "start:prod": "NODE_ENV=production node build/server.js"
   },
   "browserslist": {
-    "development": ["last 1 chrome versions", "last 1 firefox versions"],
-    "production": ["last 1 chrome versions", "last 1 firefox versions"]
+    "development": [
+      "last 1 chrome versions",
+      "last 1 firefox versions"
+    ],
+    "production": [
+      "last 1 chrome versions",
+      "last 1 firefox versions"
+    ]
   }
 }

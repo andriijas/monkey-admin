@@ -32,19 +32,7 @@ const cssRuleMatcher = rule =>
 const createLoaderMatcher = loader => rule =>
   rule.loader && rule.loader.indexOf(`${path.sep}${loader}${path.sep}`) !== -1;
 const cssLoaderMatcher = createLoaderMatcher("css-loader");
-const postcssLoaderMatcher = createLoaderMatcher("postcss-loader");
 const babelLoaderMatcher = createLoaderMatcher("babel-loader");
-//const fileLoaderMatcher = createLoaderMatcher("file-loader");
-
-const addAfterRule = (rulesSource, ruleMatcher, value) => {
-  const { index, rules } = findIndexAndRules(rulesSource, ruleMatcher);
-  rules.splice(index + 1, 0, value);
-};
-
-// const addBeforeRule = (rulesSource, ruleMatcher, value) => {
-//   const { index, rules } = findIndexAndRules(rulesSource, ruleMatcher);
-//   rules.splice(index, 0, value);
-// };
 
 function razzleLess(
   localIdentName = `[local]___[hash:base64:5]`,
@@ -67,65 +55,71 @@ function razzleLess(
       cssModulesRuleCssLoader.options
     );
     config.module.rules.push(cssModulesRule);
-    //addBeforeRule(config.module.rules, fileLoaderMatcher, cssModulesRule);
 
     lessRule.test = /\.less$/;
     lessRule.exclude.push(/\.module\.less$/);
-    addAfterRule(lessRule, postcssLoaderMatcher, {
+    const lessLoader = {
       loader: require.resolve("less-loader"),
       options: lessLoaderOptions
-    });
+    };
+    ruleChildren(lessRule).push(lessLoader);
     config.module.rules.push(lessRule);
-    //addBeforeRule(config.module.rules, fileLoaderMatcher, lessRule);
 
     const lessModulesRule = cloneDeep(cssModulesRule);
     lessModulesRule.test = /\.module\.less$/;
-
-    addAfterRule(lessModulesRule, postcssLoaderMatcher, {
-      loader: require.resolve("less-loader"),
-      options: lessLoaderOptions
-    });
+    ruleChildren(lessModulesRule).push(lessLoader);
     config.module.rules.push(lessModulesRule);
-    //addBeforeRule(config.module.rules, fileLoaderMatcher, lessModulesRule);
 
     return config;
   };
 }
 
-function razzleLessServer(config) {
-  const cssRule = findRule(config.module.rules, cssRuleMatcher);
-  const lessRule = cloneDeep(cssRule);
-
-  lessRule.test = /\.less$/;
-  addAfterRule(lessRule, cssLoaderMatcher, {
-    loader: require.resolve("less-loader")
-  });
-  config.module.rules.push(lessRule);
-
-  return config;
-}
-
 module.exports = {
   modify: (config, { target, dev }, webpack) => {
-    if (target === "web") {
-      const babelLoader = findRule(config.module.rules, babelLoaderMatcher);
-      babelLoader.options.plugins = [
-        [
-          "import",
-          { libraryName: "antd", style: true, libraryDirectory: "es" }
-        ],
-        ["dva-hmr"]
-      ];
-      config = razzleLess(`${dev ? "[local]" : "app"}-[hash:base64:8]`, {
-        modifyVars: {
-          "@primary-color": "#61dafb",
-          "@info-color": "#61dafb"
-        }
-      })(config);
-    } else {
-      //config = razzleLessServer(config);
-      config.module.rules.push({ test: /\.less$/, loader: "ignore-loader" });
+    const localIdentName = `${dev
+      ? "[name]--[local]-"
+      : "app"}-[hash:base64:8]`;
+    const babelLoader = findRule(config.module.rules, babelLoaderMatcher);
+    babelLoader.options.plugins = babelLoader.options.plugins || [];
+
+    if (dev) {
+      babelLoader.options.plugins.push(["dva-hmr"]);
     }
+
+    if (target === "web") {
+      babelLoader.options.plugins.push([
+        "import",
+        { libraryName: "antd", style: true, libraryDirectory: "es" }
+      ]);
+
+      config = razzleLess(
+        localIdentName,
+        {
+          modifyVars: {
+            "@primary-color": "#61dafb",
+            "@info-color": "#61dafb"
+          }
+        },
+        target
+      )(config);
+    } else {
+      config.module.rules.push({ test: /\.less$/, loader: "ignore-loader" });
+      babelLoader.options.plugins.push([
+        "css-modules-transform",
+        {
+          generateScopedName: localIdentName,
+          extensions: [".css", ".less"]
+        }
+      ]);
+    }
+
+    // console.log(`Config ${target}`);
+    // console.log(config.module.rules);
+
+    // if (target === "node") {
+    //   process.exit(1);
+    // }
+
     return config;
   }
 };

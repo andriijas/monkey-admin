@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "dva";
+//import { connect } from "dva";
 
 import logo from "../logo.svg";
 
@@ -23,4 +23,4 @@ function IndexPage({ location }) {
 
 IndexPage.propTypes = {};
 
-export default connect()(IndexPage);
+export default IndexPage;

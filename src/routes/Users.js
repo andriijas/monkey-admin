@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { connect } from "dva";
 import { Link, Route } from "dva/router";
 import { Menu, Icon, List, Card, Row, Col } from "antd";
 
@@ -88,4 +87,4 @@ function Users({ match, location }) {
   );
 }
 
-export default connect()(Users);
+export default Users;
