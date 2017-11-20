@@ -8,7 +8,7 @@ const Footer = props => (
     <Row type="flex" gutter={24}>
       <Col span={12}>©2038 Future Robot Inc</Col>
       <Col span={12}>
-        Allsda <span className={styles.FooterBugs}>bugs</span> reserved.
+        All <span className={styles.bugs}>bugs</span> reserved.
       </Col>
     </Row>
   </Layout.Footer>
