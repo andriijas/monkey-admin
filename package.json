@@ -1,5 +1,5 @@
 {
-  "name": "crafoo",
+  "name": "create-react-app-playground",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -7,6 +7,10 @@
     "babel-plugin-dva-hmr": "^0.4.1",
     "babel-plugin-import": "^1.6.3",
     "ignore-loader": "^0.1.2",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "lodash.clonedeep": "^4.5.0",
+    "razzle-config-utils": "^0.1.0",
     "redbox-react": "^1.5.0",
     "webpack-bundle-analyzer": "^2.9.2"
   },
@@ -27,13 +31,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "browserslist": {
-    "development": [
-      "last 1 chrome versions",
-      "last 1 firefox versions"
-    ],
-    "production": [
-      "last 1 chrome versions",
-      "last 1 firefox versions"
-    ]
+    "development": ["last 1 chrome versions", "last 1 firefox versions"],
+    "production": ["last 1 chrome versions", "last 1 firefox versions"]
   }
 }
