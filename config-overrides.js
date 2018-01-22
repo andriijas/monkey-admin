@@ -1,6 +1,11 @@
 const path = require("path");
 
-const { injectBabelPlugin, compose } = require("react-app-rewired");
+const {
+  injectBabelPlugin,
+  compose,
+  getLoader,
+  loaderNameMatches
+} = require("react-app-rewired");
 //const rewireLess = require("react-app-rewire-less");
 const rewireLess = require("react-app-rewire-less-modules");
 const rewireVendorSplitting = require("react-app-rewire-vendor-splitting");
@@ -19,6 +24,21 @@ module.exports = function override(config, env) {
   );
 
   if (env === "production") {
+    const cssRules = getLoader(
+      config.module.rules,
+      rule => String(rule.test) === String(/\.module\.css$/)
+    );
+    const cssLoader = cssRules.loader.find(loader =>
+      loaderNameMatches(loader, "css-loader")
+    );
+    if (cssLoader) {
+      cssLoader.options.localIdentName = "app-[hash:base64:8]";
+    } else {
+      throw new Error(
+        "config-overrides.js: Can not find cssLoader for localIdentName"
+      );
+    }
+
     config.plugins.push(
       new BundleAnalyzerPlugin({
         analyzerMode: "static",
@@ -28,15 +48,12 @@ module.exports = function override(config, env) {
   }
 
   const rewires = compose(
-    rewireLess.withLoaderOptions(
-      `${env === "production" ? "app" : "[local]"}-[hash:base64:8]`,
-      {
-        modifyVars: {
-          "@primary-color": "#61dafb",
-          "@info-color": "#61dafb"
-        }
+    rewireLess.withLoaderOptions({
+      modifyVars: {
+        "@primary-color": "#61dafb",
+        "@info-color": "#61dafb"
       }
-    ),
+    }),
     rewireVendorSplitting
   );
 
