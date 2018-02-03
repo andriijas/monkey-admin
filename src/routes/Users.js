@@ -1,22 +1,21 @@
 import React, { PureComponent } from "react";
-import { connect } from "dva";
-import { Link, Route } from "dva/router";
+import { Link, Route } from "react-router-dom";
 import { Menu, Icon, List, Card, Row, Col } from "antd";
 
 const wishlists = {
   molly: [
     { title: "Dolly", description: "Molly wants a dolly" },
     { title: "Final Fantasy IX", description: "vamos alla flamenco" },
-    { title: "lorem ipsum", description: "doler sit amet" }
+    { title: "lorem ipsum", description: "doler sit amet" },
   ],
   cesar: [
     { title: "9mil", description: "Cesar needs a pistol" },
     { title: "Bacon", description: "Cesar dont want sallad" },
     {
       title: "Duis aute irure",
-      description: "quis nostrud exercitation ullamco. "
-    }
-  ]
+      description: "quis nostrud exercitation ullamco. ",
+    },
+  ],
 };
 
 class UserHead extends PureComponent {
@@ -88,4 +87,4 @@ function Users({ match, location }) {
   );
 }
 
-export default connect()(Users);
+export default Users;
