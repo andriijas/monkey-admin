@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Route, Redirect, Switch } from "react-router-dom";
 import DocumentTitle from "components/DocumentTitle";
-import { Layout } from "antd";
+//import { Layout } from "antd";
 import Footer from "components/Footer";
 import styles from "./UserLayout.module.less";
 
@@ -12,8 +12,8 @@ class UserLayout extends React.PureComponent {
     const { match } = this.props;
     return (
       <DocumentTitle title="monkey admin">
-        <Layout>
-          <Layout.Content className={styles.container}>
+        <div className={styles.layout}>
+          <div className={styles.content}>
             <div className={styles.main}>
               <div className={styles.header}>
                 <Link to="/">
@@ -28,9 +28,9 @@ class UserLayout extends React.PureComponent {
                 <Redirect exact from={match.path} to={`${match.path}/login`} />
               </Switch>
             </div>
-          </Layout.Content>
+          </div>
           <Footer className={styles.footer} />
-        </Layout>
+        </div>
       </DocumentTitle>
     );
   }

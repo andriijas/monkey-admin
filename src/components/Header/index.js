@@ -18,7 +18,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { currentUser, collapsed, isMobile, onMenuClick } = this.props;
+    const { currentUser, collapsed, isMobile } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={() => {}}>
         <Menu.Item>

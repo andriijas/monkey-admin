@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 import DocumentTitle from "components/DocumentTitle";
 import SiderMenu from "components/SiderMenu";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import Breadcrumb from "components/Breadcrumb";
-import styles from "./BasicLayout.module.less";
+//import styles from "./BasicLayout.module.less";
 
 import Dashboard from "routes/Dashboard";
 import Posts from "routes/Posts";
@@ -66,7 +66,12 @@ class BasicLayout extends React.PureComponent {
               onCollapse={this.handleMenuCollapse}
               // onMenuClick={this.handleMenuClick}
             />
-            <Layout.Content style={{ margin: "24px 24px 0", height: "100%" }}>
+            <Layout.Content
+              style={{
+                margin: isMobile ? "88px 24px 0" : "24px 24px 0",
+                height: "100%",
+              }}
+            >
               <Breadcrumb />
               <Switch>
                 <Route path={"/"} component={Dashboard} exact />
@@ -74,7 +79,7 @@ class BasicLayout extends React.PureComponent {
                 <Route path={"/albums"} component={Albums} exact />
                 <Route path={"/todos/my"} component={MyTodos} exact />
                 <Route path={"/todos"} component={Todos} />
-                <Route path={"/users"} component={Users} exact />
+                <Route path={"/users"} component={Users} />
               </Switch>
             </Layout.Content>
             <Footer />

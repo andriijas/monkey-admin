@@ -49,7 +49,7 @@ module.exports = function override(config, env) {
         "@layout-header-background": "#fff",
         "@layout-sider-background": "#282A36",
         "@menu-dark-bg": "#282A36",
-        "@menu-dark-submenu-bg": "#21222c",
+        "@menu-dark-submenu-bg": "#000a0a",
       },
     }),
     rewireVendorSplitting,

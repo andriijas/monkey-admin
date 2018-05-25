@@ -29,7 +29,7 @@
     "webpack-bundle-analyzer": "^2.10.0"
   },
   "dependencies": {
-    "antd": "^3.1.6",
+    "antd": "^3.2.0",
     "prop-types": "^15.6.0",
     "rc-drawer-menu": "^0.5.4",
     "react": "^16.3.0-alpha.0",

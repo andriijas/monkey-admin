@@ -6,9 +6,79 @@ import styles from "./index.module.less";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-class SiderMenu extends React.Component {
+class SiderMenu extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openKeys: this.getDefaultCollapsedSubMenus(props),
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.setState({
+        openKeys: this.getDefaultCollapsedSubMenus(nextProps),
+      });
+    }
+  }
+  /**
+   * Convert pathname to openKeys
+   * /list/search/articles = > ['list','/list/search']
+   * @param  props
+   */
+  getDefaultCollapsedSubMenus(props) {
+    const { location: { pathname } } = props || this.props;
+    // const [_, first, second, ...rest] = pathname.split("/");
+    // return [`/${first}`];
+    return [`/${pathname.split("/")[1]}`];
+
+    // // eg. /list/search/articles = > ['','list','search','articles']
+    // let snippets = pathname.split("/");
+    // // Delete the end
+    // // eg.  delete 'articles'
+    // snippets.pop();
+    // // Delete the head
+    // // eg. delete ''
+    // snippets.shift();
+    // // eg. After the operation is completed, the array should be ['list','search']
+    // // eg. Forward the array as ['list','list/search']
+    // snippets = snippets.map((item, index) => {
+    //   // If the array length > 1
+    //   if (index > 0) {
+    //     // eg. search => ['list','search'].join('/')
+    //     return snippets.slice(0, index + 1).join("/");
+    //   }
+    //   // index 0 to not do anything
+    //   return item;
+    // });
+    // snippets = snippets.map(item => {
+    //   return this.getSelectedMenuKeys(`/${item}`)[0];
+    // });
+    // // eg. ['list','list/search']
+    // return snippets;
+  }
+  handleOpenChange = openKeys => {
+    this.setState({ openKeys });
+    // const lastOpenKey = openKeys[openKeys.length - 1];
+    // const isMainMenu = this.menus.some(
+    //   item =>
+    //     lastOpenKey && (item.key === lastOpenKey || item.path === lastOpenKey),
+    // );
+    // this.setState({
+    //   openKeys: isMainMenu ? [lastOpenKey] : [...openKeys],
+    // });
+  };
   render() {
     const { collapsed, onCollapse, location } = this.props;
+    const { openKeys } = this.state;
+    // Don't show popup menu when it is been collapsed
+    const menuProps = collapsed
+      ? {}
+      : {
+          openKeys,
+        };
+    // if pathname can't match, use the nearest parent's key
+    menuProps["selectedKeys"] = [location.pathname];
+
     return (
       <Sider
         trigger={null}
@@ -31,10 +101,8 @@ class SiderMenu extends React.Component {
           key="Menu"
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[location.pathname]}
-          defaultOpenKeys={[location.pathname]}
-          onOpenChange={() => {}}
-          //          selectedKeys={selectedKeys}
+          {...menuProps}
+          onOpenChange={this.handleOpenChange}
           style={{ padding: "16px 0", width: "100%" }}
         >
           <Menu.Item key="/">

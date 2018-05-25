@@ -1,41 +1,68 @@
 import React from "react";
-import { Card, Row, Col } from "antd";
+import { List, Avatar, Icon, Card } from "antd";
 
 class Posts extends React.Component {
+  state = {
+    dataSource: [],
+    loading: true,
+  };
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(r => r.json())
+      .then(dataSource =>
+        this.setState({
+          dataSource,
+          loading: false,
+        }),
+      );
+  }
+
   render() {
     console.log(this.props.match.path);
+    const { dataSource, loading } = this.state;
+    const IconText = ({ type, text }) => (
+      <span>
+        <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+      </span>
+    );
     return (
-      <>
-        <Card style={{ marginBottom: "24px" }}>
-          <h1>Posts</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </Card>
-        <Row gutter={16}>
-          <Col span={8}>
-            <Card title="Card title" bordered={false}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={8}>
-            <Card title="Card title" bordered={false}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={8}>
-            <Card title="Card title" bordered={false}>
-              Card content
-            </Card>
-          </Col>
-        </Row>
-      </>
+      <Card title="Posts" loading={loading}>
+        <List
+          loading={loading}
+          itemLayout="vertical"
+          size="large"
+          pagination={{
+            onChange: page => {
+              console.log(page);
+            },
+            pageSize: 3,
+          }}
+          dataSource={dataSource}
+          footer={
+            <div>
+              <b>ant design</b> footer part
+            </div>
+          }
+          renderItem={item => (
+            <List.Item
+              key={item.title}
+              actions={[
+                <IconText type="star-o" text="156" />,
+                <IconText type="like-o" text="156" />,
+                <IconText type="message" text="2" />,
+              ]}
+            >
+              <List.Item.Meta
+                avatar={<Avatar>{item.title.substring(0)}</Avatar>}
+                title={item.title}
+              />
+              {item.body}
+            </List.Item>
+          )}
+        />
+      </Card>
     );
   }
 }
