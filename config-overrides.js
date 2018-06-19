@@ -6,15 +6,11 @@ const {
 } = require("react-app-rewired");
 //const rewireLess = require("react-app-rewire-less");
 const rewireLess = require("react-app-rewire-less-modules");
-const rewireVendorSplitting = require("react-app-rewire-vendor-splitting");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const paths = require("react-app-rewired/scripts/utils/paths");
 
 module.exports = function override(config, env) {
-  // https://github.com/heroku/react-refetch/pull/198
-  config.resolve.alias["react-refetch"] = "react-refetch-pre";
-
   config = injectBabelPlugin(
     ["import", { libraryName: "antd", style: true, libraryDirectory: "es" }],
     config,
@@ -42,6 +38,7 @@ module.exports = function override(config, env) {
 
   const rewires = compose(
     rewireLess.withLoaderOptions({
+      javascriptEnabled: true,
       modifyVars: {
         "@primary-color": "#ff79c6",
         "@info-color": "#61dafb",
@@ -52,7 +49,6 @@ module.exports = function override(config, env) {
         "@menu-dark-submenu-bg": "#000a0a",
       },
     }),
-    rewireVendorSplitting,
   );
 
   return rewires(config, env);

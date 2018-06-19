@@ -16,82 +16,86 @@ exports[`renders correctly 1`] = `
         className="ant-form-item-control"
       >
         <span
-          className="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
-          style={undefined}
+          className="ant-form-item-children"
         >
           <span
-            className="ant-input-prefix"
+            className="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            style={undefined}
           >
-            <i
-              className="anticon anticon-user"
-              style={
+            <span
+              className="ant-input-prefix"
+            >
+              <i
+                className="anticon anticon-user"
+                style={
+                  Object {
+                    "color": "rgba(0,0,0,.25)",
+                  }
+                }
+              />
+            </span>
+            <input
+              className="ant-input ant-input-lg"
+              data-__field={
                 Object {
-                  "color": "rgba(0,0,0,.25)",
+                  "name": "username",
                 }
               }
+              data-__meta={
+                Object {
+                  "name": "username",
+                  "originalProps": Object {
+                    "disabled": false,
+                    "placeholder": "E-mail",
+                    "prefix": <Icon
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,.25)",
+                        }
+                      }
+                      type="user"
+                    />,
+                    "prefixCls": "ant-input",
+                    "size": "large",
+                    "type": "text",
+                  },
+                  "ref": null,
+                  "rules": Array [
+                    Object {
+                      "message": "Please enter your e-mail",
+                      "required": true,
+                      "type": "email",
+                    },
+                  ],
+                  "trigger": "onChange",
+                  "validate": Array [
+                    Object {
+                      "rules": Array [
+                        Object {
+                          "message": "Please enter your e-mail",
+                          "required": true,
+                          "type": "email",
+                        },
+                      ],
+                      "trigger": Array [
+                        "onChange",
+                      ],
+                    },
+                  ],
+                  "valuePropName": "value",
+                }
+              }
+              disabled={false}
+              id="username"
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="E-mail"
+              size="large"
+              style={null}
+              type="text"
+              value=""
             />
           </span>
-          <input
-            className="ant-input ant-input-lg"
-            data-__field={
-              Object {
-                "name": "username",
-              }
-            }
-            data-__meta={
-              Object {
-                "name": "username",
-                "originalProps": Object {
-                  "disabled": false,
-                  "placeholder": "E-mail",
-                  "prefix": <Icon
-                    style={
-                      Object {
-                        "color": "rgba(0,0,0,.25)",
-                      }
-                    }
-                    type="user"
-                  />,
-                  "prefixCls": "ant-input",
-                  "size": "large",
-                  "type": "text",
-                },
-                "ref": null,
-                "rules": Array [
-                  Object {
-                    "message": "Please enter your e-mail",
-                    "required": true,
-                    "type": "email",
-                  },
-                ],
-                "trigger": "onChange",
-                "validate": Array [
-                  Object {
-                    "rules": Array [
-                      Object {
-                        "message": "Please enter your e-mail",
-                        "required": true,
-                        "type": "email",
-                      },
-                    ],
-                    "trigger": Array [
-                      "onChange",
-                    ],
-                  },
-                ],
-                "valuePropName": "value",
-              }
-            }
-            disabled={false}
-            id="username"
-            onChange={[Function]}
-            onKeyDown={[Function]}
-            placeholder="E-mail"
-            size="large"
-            style={null}
-            type="text"
-            value=""
-          />
         </span>
       </div>
     </div>
@@ -107,80 +111,84 @@ exports[`renders correctly 1`] = `
         className="ant-form-item-control"
       >
         <span
-          className="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
-          style={undefined}
+          className="ant-form-item-children"
         >
           <span
-            className="ant-input-prefix"
+            className="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            style={undefined}
           >
-            <i
-              className="anticon anticon-lock"
-              style={
+            <span
+              className="ant-input-prefix"
+            >
+              <i
+                className="anticon anticon-lock"
+                style={
+                  Object {
+                    "color": "rgba(0,0,0,.25)",
+                  }
+                }
+              />
+            </span>
+            <input
+              className="ant-input ant-input-lg"
+              data-__field={
                 Object {
-                  "color": "rgba(0,0,0,.25)",
+                  "name": "password",
                 }
               }
+              data-__meta={
+                Object {
+                  "name": "password",
+                  "originalProps": Object {
+                    "disabled": false,
+                    "placeholder": "Password",
+                    "prefix": <Icon
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,.25)",
+                        }
+                      }
+                      type="lock"
+                    />,
+                    "prefixCls": "ant-input",
+                    "size": "large",
+                    "type": "password",
+                  },
+                  "ref": null,
+                  "rules": Array [
+                    Object {
+                      "message": "Please enter your password",
+                      "required": true,
+                    },
+                  ],
+                  "trigger": "onChange",
+                  "validate": Array [
+                    Object {
+                      "rules": Array [
+                        Object {
+                          "message": "Please enter your password",
+                          "required": true,
+                        },
+                      ],
+                      "trigger": Array [
+                        "onChange",
+                      ],
+                    },
+                  ],
+                  "valuePropName": "value",
+                }
+              }
+              disabled={false}
+              id="password"
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Password"
+              size="large"
+              style={null}
+              type="password"
+              value=""
             />
           </span>
-          <input
-            className="ant-input ant-input-lg"
-            data-__field={
-              Object {
-                "name": "password",
-              }
-            }
-            data-__meta={
-              Object {
-                "name": "password",
-                "originalProps": Object {
-                  "disabled": false,
-                  "placeholder": "Password",
-                  "prefix": <Icon
-                    style={
-                      Object {
-                        "color": "rgba(0,0,0,.25)",
-                      }
-                    }
-                    type="lock"
-                  />,
-                  "prefixCls": "ant-input",
-                  "size": "large",
-                  "type": "password",
-                },
-                "ref": null,
-                "rules": Array [
-                  Object {
-                    "message": "Please enter your password",
-                    "required": true,
-                  },
-                ],
-                "trigger": "onChange",
-                "validate": Array [
-                  Object {
-                    "rules": Array [
-                      Object {
-                        "message": "Please enter your password",
-                        "required": true,
-                      },
-                    ],
-                    "trigger": Array [
-                      "onChange",
-                    ],
-                  },
-                ],
-                "valuePropName": "value",
-              }
-            }
-            disabled={false}
-            id="password"
-            onChange={[Function]}
-            onKeyDown={[Function]}
-            placeholder="Password"
-            size="large"
-            style={null}
-            type="password"
-            value=""
-          />
         </span>
       </div>
     </div>
@@ -195,20 +203,24 @@ exports[`renders correctly 1`] = `
       <div
         className="ant-form-item-control"
       >
-        <button
-          className="ant-btn ant-btn-primary ant-btn-lg"
-          onClick={[Function]}
-          style={
-            Object {
-              "width": "100%",
-            }
-          }
-          type="submit"
+        <span
+          className="ant-form-item-children"
         >
-          <span>
-            Log in
-          </span>
-        </button>
+          <button
+            className="ant-btn ant-btn-primary ant-btn-lg"
+            onClick={[Function]}
+            style={
+              Object {
+                "width": "100%",
+              }
+            }
+            type="submit"
+          >
+            <span>
+              Log in
+            </span>
+          </button>
+        </span>
       </div>
     </div>
   </div>
