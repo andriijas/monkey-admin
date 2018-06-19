@@ -1,17 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "antd";
+import Authorized from "components/Authorized";
 import LoginForm from "components/LoginForm";
 import DocumentTitle from "components/DocumentTitle";
 
 class LoginPage extends React.Component {
   state = {
-    loginFailed: false,
+    loading: false,
+    loginError: null,
   };
 
-  handleSubmit = (err, values) => {
+  handleSubmit = login => (err, values) => {
     if (!err) {
-      //this.props.submitLogin(values);
+      this.setState({ loading: true });
+      login(values.username, values.password)
+        .then(() => {
+          this.props.history.replace("/");
+        })
+        .catch(() => {
+          this.setState({
+            loading: false,
+            loginError: "Login failed. Please try again! 🙈",
+          });
+        });
     }
   };
 
@@ -29,12 +41,19 @@ class LoginPage extends React.Component {
   render() {
     return (
       <DocumentTitle title="Log in">
-        <>
-          {this.state.loginFailed &&
-            this.renderMessage("Login failed. Please try again! 🙈")}
-          <LoginForm loading={false} onSubmit={this.handleSubmit} />
-          <Link to="/">Forgott password?</Link>
-        </>
+        <Authorized>
+          {({ login }) => (
+            <>
+              {this.state.loginError &&
+                this.renderMessage(this.state.loginError)}
+              <LoginForm
+                loading={this.state.loading}
+                onSubmit={this.handleSubmit(login)}
+              />
+              <Link to="/">Forgott password?</Link>
+            </>
+          )}
+        </Authorized>
       </DocumentTitle>
     );
   }

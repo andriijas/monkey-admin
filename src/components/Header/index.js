@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Icon, Spin, Divider, Avatar, Dropdown } from "antd";
 import classnames from "classnames";
+import Authorized from "components/Authorized";
 import styles from "./index.module.less";
 
 class Header extends React.Component {
@@ -18,7 +19,8 @@ class Header extends React.Component {
   }
 
   render() {
-    const { currentUser, collapsed, isMobile } = this.props;
+    const { logout, currentUser, collapsed, isMobile } = this.props;
+
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={() => {}}>
         <Menu.Item>
@@ -29,7 +31,7 @@ class Header extends React.Component {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
-          <Link to="/user/login">
+          <Link to="/user/login" onClick={() => logout()}>
             <Icon type="logout" />Log out
           </Link>
         </Menu.Item>
@@ -71,4 +73,12 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const HeaderWrapper = props => (
+  <Authorized>
+    {({ logout, currentUser }) => (
+      <Header {...props} logout={logout} currentUser={currentUser} />
+    )}
+  </Authorized>
+);
+
+export default HeaderWrapper;

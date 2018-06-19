@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Row, Col } from "antd";
+import RequireLogin from "components/Authorized/RequireLogin";
 
 class Dashboard extends React.Component {
   render() {
@@ -25,9 +26,11 @@ class Dashboard extends React.Component {
             </Card>
           </Col>
           <Col span={8}>
-            <Card title="Card title" bordered={false}>
-              Card content
-            </Card>
+            <RequireLogin>
+              <Card title="Card title" bordered={false}>
+                Card content
+              </Card>
+            </RequireLogin>
           </Col>
           <Col span={8}>
             <Card title="Card title" bordered={false}>

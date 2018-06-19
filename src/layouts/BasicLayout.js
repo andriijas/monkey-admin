@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import DocumentTitle from "components/DocumentTitle";
 import SiderMenu from "components/SiderMenu";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import Breadcrumb from "components/Breadcrumb";
+import Authorized from "components/Authorized";
 //import styles from "./BasicLayout.module.less";
 
 import Dashboard from "routes/Dashboard";
@@ -60,7 +61,6 @@ class BasicLayout extends React.PureComponent {
           />
           <Layout>
             <Header
-              currentUser={{ name: "April Bagle" }}
               collapsed={collapsed}
               isMobile={isMobile}
               onCollapse={this.handleMenuCollapse}
@@ -90,4 +90,16 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default BasicLayout;
+const BasicLayoutWrapper = props => (
+  <Authorized>
+    {({ sessionKey, currentUser }) => {
+      if (sessionKey) {
+        return <BasicLayout {...props} />;
+      } else {
+        return <Redirect to="/user/login" />;
+      }
+    }}
+  </Authorized>
+);
+
+export default BasicLayoutWrapper;
